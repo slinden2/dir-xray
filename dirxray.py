@@ -20,7 +20,7 @@ Please type a number and press enter:
 2.  List xray files
 3.  Compare xray files
 4.  Set a new directory for xray files
-5.  Help
+5.  Info
 6.  Exit
     """)
 
@@ -82,8 +82,9 @@ if __name__ == "__main__":
 
         elif user_input == 5:
             os.system('cls')
-            print("HELP")
+            print("INFO")
             print(Config.LINE_SEP)
+            dirxrayhelper.info()
             user_input = menu()
 
     print("Thank you for using Dir XRAY.")
