@@ -28,3 +28,4 @@ __pycache__/
 
 # Ignore a single file
 dirxray_config.json
+scrap_*.py
