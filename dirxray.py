@@ -23,15 +23,18 @@ DIR XRAY
 
 
 class Controller:
-
+    """Main controller class of the application. Generates the main
+    menu.
+    """
     @staticmethod
     def execute(user_input):
         controller_name = f"do_{user_input}"
         try:
             controller = getattr(Controller, controller_name)
         except AttributeError:
-            return
-        controller()
+            pass
+        else:
+            controller()
 
     @staticmethod
     def do_1():
@@ -79,6 +82,9 @@ class Controller:
 
 
 def create_config_file():
+    """Create a config file to the current working directory
+    with the default settings if it doesn't already exist.
+    """
     if not os.path.exists(os.path.join(os.getcwd(), Config.FILE)):
         config_dict = {}
         config_dict['save_to_xray_path'] = True

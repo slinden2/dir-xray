@@ -43,7 +43,7 @@ def create_xray(path):
     else:
         print("The files have been saved successfully")
     finally:
-        input("Press [Enter] to continue.")
+        input(Config.ENTER_CONTINUE)
 
 
 def list_xrays():
@@ -270,4 +270,4 @@ have changed the save directory between xrays, you will find the files only
 from the most recent location.
 """)
 
-    input("Press any key to continue.")
+    input(Config.ENTER_CONTINUE)
