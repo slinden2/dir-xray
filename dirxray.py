@@ -6,20 +6,14 @@ import dirxrayhelper
 class Config:
     FILE = "dirxray_config.json"
     LINE_SEP = "=" * 30
-    EXIT_NUMBER = 6
+    EXIT_NUMBER = 9
     ENTER_CONTINUE = "Press <Enter> to continue."
-    MENU = f"""
+    TITLE = f"""
 DIR XRAY
-    DIRECTORY/FILE COMPARISON TOOL
-    {LINE_SEP}
-    Please type a number and press enter:
-    1.  Create an xray
-    2.  List xray files
-    3.  Compare xray files
-    4.  Set a new directory for xray files
-    5.  Info
-    {EXIT_NUMBER}.  Exit
-        """
+DIRECTORY/FILE COMPARISON TOOL
+{LINE_SEP}"""
+    EXIT_ACTION = f"{EXIT_NUMBER}.  Exit"
+    INDENT = "    "
 
 
 class Controller:
@@ -38,6 +32,7 @@ class Controller:
 
     @staticmethod
     def do_1():
+        """Create an xray"""
         os.system('cls')
         print("CREATE XRAY")
         print(Config.LINE_SEP)
@@ -46,6 +41,7 @@ class Controller:
 
     @staticmethod
     def do_2():
+        """List xray files"""
         os.system('cls')
         print("LIST OF XRAY FILES")
         print(Config.LINE_SEP)
@@ -53,6 +49,7 @@ class Controller:
 
     @staticmethod
     def do_3():
+        """Compare xray files"""
         os.system('cls')
         print("COMPARE XRAY FILES")
         print(Config.LINE_SEP)
@@ -60,6 +57,7 @@ class Controller:
 
     @staticmethod
     def do_4():
+        """Set a new directory for xray files"""
         os.system('cls')
         print("SET NEW DIRECTORY FOR THE XRAY FILES")
         print(Config.LINE_SEP)
@@ -67,16 +65,27 @@ class Controller:
 
     @staticmethod
     def do_5():
+        """Info"""
         os.system('cls')
         print("INFO")
         print(Config.LINE_SEP)
         dirxrayhelper.info()
 
     @staticmethod
+    def generate_menu():
+        print(Config.TITLE)
+        do_methods = [m for m in dir(Controller) if m.startswith('do_')]
+        menu_string = "\n".join(
+            [f"{method[-1]}.  {getattr(Controller, method).__doc__}"
+             for method in do_methods if method.startswith("do_")])
+        print(menu_string)
+        print(f"{Config.EXIT_ACTION}", end="\n\n")
+
+    @staticmethod
     def run(user_input=0):
         while(user_input != Config.EXIT_NUMBER):
-            print(Config.MENU)
-            user_input = dirxrayhelper.get_user_input(7)
+            Controller.generate_menu()
+            user_input = dirxrayhelper.get_user_input(Config.EXIT_NUMBER + 1)
             Controller.execute(user_input)
         print("Thank you for using Dir XRAY.")
 
